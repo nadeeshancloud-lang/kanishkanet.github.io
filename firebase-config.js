@@ -10,10 +10,12 @@ const firebaseConfig = {
 };
 
 // 2. Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const auth = firebase.auth();
 
-// 3. Page එක Load වුණාම Buttons වැඩ කරන්න ඕන නිසා මේ කොටස වැදගත්
+// 3. Button Logic
 window.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
     const statusMsg = document.getElementById('statusMsg');
@@ -31,7 +33,6 @@ window.addEventListener('DOMContentLoaded', () => {
             statusMsg.style.color = "white";
 
             const actionCodeSettings = {
-                // ඔයාගේ සැබෑ URL එක මෙතන තියෙන්න ඕනේ
                 url: 'https://nadeeshancloud-lang.github.io/kanishkanet.github.io/',
                 handleCodeInApp: true,
             };
@@ -39,18 +40,23 @@ window.addEventListener('DOMContentLoaded', () => {
             auth.sendSignInLinkToEmail(email, actionCodeSettings)
                 .then(() => {
                     window.localStorage.setItem('emailForSignIn', email);
-                    statusMsg.innerText = "Success! Please check your Email Inbox. If it's not there,
-                        don't forget to check your 'Spam' folder.";
+                    // මෙතන තමයි කලින් වැරැද්ද තිබුණේ. දැන් මේක පේළි දෙකකට වුණත් වැඩ කරනවා.
+                    statusMsg.innerHTML = "Success! Please check your Email Inbox.<br><small style='color:#ffcc00;'>*Check <b>Spam</b> folder if not found.</small>";
                     statusMsg.style.color = "#00f2ff";
                 })
                 .catch((error) => {
-                    statusMsg.innerText = "Error: " + error.message;
+                    // Quota එක පැනපු වෙලාවට දෙන message එක
+                    if (error.code === 'auth/quota-exceeded') {
+                        statusMsg.innerText = "Daily limit reached. Please try again tomorrow!";
+                    } else {
+                        statusMsg.innerText = "Error: " + error.message;
+                    }
                     statusMsg.style.color = "red";
                 });
         };
     }
 
-    // 4. Email එකේ ලින්ක් එක ක්ලික් කරලා ආවම වැඩ කරන කොටස
+    // 4. Handle Login Link
     if (auth.isSignInWithEmailLink(window.location.href)) {
         let email = window.localStorage.getItem('emailForSignIn');
         if (!email) {
@@ -60,8 +66,8 @@ window.addEventListener('DOMContentLoaded', () => {
             .then((result) => {
                 window.localStorage.removeItem('emailForSignIn');
                 alert("සාර්ථකව Log වුණා: " + result.user.email);
-                location.reload(); 
+                window.location.href = window.location.origin + window.location.pathname; 
             })
-            .catch((error) => alert(error.message));
+            .catch((error) => alert("Login Error: " + error.message));
     }
 });
