@@ -290,3 +290,16 @@ h1, h2, h3, .logo { font-family: 'Orbitron', sans-serif; }
         font-size: 1.3rem;
     }
 }
+.contact-link {
+    color: #00f2ff; /* ඔයාගේ Theme එකට ගැලපෙන Neon Cyan පාට */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 1px dashed transparent;
+}
+
+.contact-link:hover {
+    color: #fff;
+    border-bottom: 1px dashed #00f2ff;
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.6);
+}
