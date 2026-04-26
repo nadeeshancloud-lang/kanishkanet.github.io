@@ -39,7 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
             auth.sendSignInLinkToEmail(email, actionCodeSettings)
                 .then(() => {
                     window.localStorage.setItem('emailForSignIn', email);
-                    statusMsg.innerText = "Success! Check your Email Inbox.";
+                    statusMsg.innerText = "Success! Please check your Email Inbox. If it's not there,
+                        don't forget to check your 'Spam' folder.";
                     statusMsg.style.color = "#00f2ff";
                 })
                 .catch((error) => {
