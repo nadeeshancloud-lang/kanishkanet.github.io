@@ -110,3 +110,14 @@ function animateParticles() {
 }
 createParticles();
 animateParticles();
+// Dynamic Video IDs - ඔයාට ඕන වෙලාවක මේ IDs මාරු කරන්න පුළුවන්
+const videoIDs = ["femu3mA-NAw", "dmBHvMUfDL8", "u-G33yWO1X0", "Mv7_PDvbaxE"];
+
+const videoGrid = document.getElementById('videoGrid');
+if (videoGrid) {
+    videoGrid.innerHTML = videoIDs.map(id => `
+        <div class="glass-card video-container reveal">
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>
+        </div>
+    `).join('');
+}
