@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Video grid sathi extra styling (index.html madhech add kele aahe) */
+        /* Video grid sathi extra styling */
         .video-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -17,6 +17,22 @@
         }
         @media(min-width: 768px) {
             .video-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        /* Login Input styling */
+        .glass-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            width: 100%;
+            padding: 12px;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 15px;
+        }
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -35,7 +51,7 @@
         <ul class="nav-links">
             <li><a href="#hub">Hub</a></li>
             <li><a href="#videos">Videos</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#login">Login</a></li> <li><a href="#about">About</a></li>
         </ul>
     </nav>
 
@@ -45,7 +61,7 @@
             We provide high-quality technology tutorials,<br>
             AI tool reviews,<br>
             and software insights to help you navigate the modern digital world</p>
-        <button class="btn-primary" onclick="scrollToHub()">
+        <button class="btn-primary" onclick="location.href='#hub'">
             <i class="fa-solid fa-rocket"></i> Launch Hub
         </button>
     </header>
@@ -100,14 +116,31 @@
         </div>
     </section>
 
+    <section id="login" class="container reveal">
+        <h2 class="section-title">Secure Access</h2>
+        <div class="glass-card about-card" style="text-align: center;">
+            <p style="margin-bottom: 20px;">Enter your Email for a secure magic login link. No password required.</p>
+            
+            <div style="max-width: 400px; margin: 0 auto;">
+                <input type="email" id="userEmail" placeholder="Enter your Gmail / Email" class="glass-input">
+                <button id="loginBtn" class="btn-primary" style="width: 100%;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Magic Link
+                </button>
+            </div>
+            
+            <p id="statusMsg" style="margin-top: 20px; font-weight: bold; color: var(--accent);"></p>
+        </div>
+    </section>
+
     <section id="about" class="container reveal">
         <div class="glass-card about-card">
             <h2 class="section-title">About Us!</h2>
             <p>Welcome to Kanishka Net. A dedicated Tech Strategist and Content Creator specializing in Software Development, AI Prompt Engineering, and System Optimization. Driven by a passion for the Physical Sciences and ICT, I focus on bridging the gap between high-end technology and creative execution. Through Kanishka Net, I deliver curated insights and high-performance tools designed to empower the next generation of digital creators and tech enthusiasts, helping them navigate the digital frontier with precision and efficiency.</p>
-            <h2 class="section-title">Contact Us</h2>
+            
+            <h2 class="section-title" style="margin-top: 30px;">Contact Us</h2>
             <p>Email: nadeeshancloud@gmail.com</p>
             <p>Phone: +94743000964</p>
-            <div class="social-row">
+            <div class="social-row" style="margin-top: 15px;">
                 <button class="btn-icon" onclick="copyLink()"><i class="fa-solid fa-link"></i> Share Link</button>
             </div>
         </div>
@@ -116,54 +149,88 @@
     <div id="toast" class="toast">Link copied to clipboard!</div>
 
     <script src="script.js"></script>
+    
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
-<script>
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAeERgDlc_KYCrLRCCc_fFbnKdPziuGOCM",
-    authDomain: "kanishka-net.firebaseapp.com",
-    projectId: "kanishka-net",
-    storageBucket: "kanishka-net.firebasestorage.app",
-    messagingSenderId: "667002787187",
-    appId: "1:667002787187:web:faa321ad901fffadbde106",
-    measurementId: "G-L7GLN61TZV"
-  };
+    <script>
+      // ඔයාගේ Firebase Settings
+      const firebaseConfig = {
+        apiKey: "AIzaSyAeERgDlc_KYCrLRCCc_fFbnKdPziuGOCM",
+        authDomain: "kanishka-net.firebaseapp.com",
+        projectId: "kanishka-net",
+        storageBucket: "kanishka-net.firebasestorage.app",
+        messagingSenderId: "667002787187",
+        appId: "1:667002787187:web:faa321ad901fffadbde106",
+        measurementId: "G-L7GLN61TZV"
+      };
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
 
-  // Login Function
-  document.getElementById('loginBtn').onclick = function() {
-    const email = document.getElementById('userEmail').value;
-    const actionCodeSettings = {
-      url: 'https://kanishkanet.github.io/', 
-      handleCodeInApp: true,
-    };
+      // Login Button Click Event
+      document.getElementById('loginBtn').onclick = function() {
+        const email = document.getElementById('userEmail').value;
+        const statusMsg = document.getElementById('statusMsg');
 
-    auth.sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(() => {
-        window.localStorage.setItem('emailForSignIn', email);
-        alert("Magic Link එක ඔයාගේ Email එකට යැව්වා. Email එක පරීක්ෂා කරන්න!");
-      })
-      .catch((error) => alert(error.message));
-  };
+        if(!email) { 
+            statusMsg.innerText = "Please enter your email first!";
+            statusMsg.style.color = "red";
+            return; 
+        }
 
-  // Handle Redirect
-  if (auth.isSignInWithEmailLink(window.location.href)) {
-    let email = window.localStorage.getItem('emailForSignIn');
-    if (!email) {
-      email = window.prompt('Please provide your email for confirmation');
-    }
-    auth.signInWithEmailLink(email, window.location.href)
-      .then((result) => {
-        window.localStorage.removeItem('emailForSignIn');
-        alert("සාර්ථකව Log වුණා: " + result.user.email);
-      })
-      .catch((error) => alert(error.message));
-  }
-</script>
+        statusMsg.innerText = "Sending link...";
+        statusMsg.style.color = "white";
+
+        const actionCodeSettings = {
+          // GitHub සයිට් එකේ දැනට තියෙන URL එක මෙතනින් ස්වයංක්‍රීයව ගනී
+          url: window.location.href.split('#')[0], 
+          handleCodeInApp: true,
+        };
+
+        auth.sendSignInLinkToEmail(email, actionCodeSettings)
+          .then(() => {
+            window.localStorage.setItem('emailForSignIn', email);
+            statusMsg.innerText = "Success! Check your Email Inbox for the Login Link.";
+            statusMsg.style.color = "var(--accent)";
+            document.getElementById('userEmail').value = ""; // Clear input
+          })
+          .catch((error) => {
+            statusMsg.innerText = "Error: " + error.message;
+            statusMsg.style.color = "red";
+          });
+      };
+
+      // Handle the Login after clicking the link in Email
+      if (auth.isSignInWithEmailLink(window.location.href)) {
+        let email = window.localStorage.getItem('emailForSignIn');
+        
+        // Browser එක වැහිලා තිබුණොත් Email එක අහනවා
+        if (!email) { 
+            email = window.prompt('Please confirm your email to login:'); 
+        }
+
+        auth.signInWithEmailLink(email, window.location.href)
+          .then((result) => {
+            window.localStorage.removeItem('emailForSignIn');
+            
+            // Log වුණාට පස්සේ පෙන්වන කොටස
+            const loginSection = document.getElementById('login').querySelector('.about-card');
+            loginSection.innerHTML = `
+                <h3 style="color: var(--accent); margin-bottom: 10px;">Welcome Back!</h3>
+                <p>You are securely logged in as:</p>
+                <p style="font-weight: bold; font-size: 1.1rem; margin: 10px 0;">${result.user.email}</p>
+                <button class="btn-primary" onclick="firebase.auth().signOut().then(() => location.reload())">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            `;
+            alert("සාර්ථකව Log වුණා!");
+          })
+          .catch((error) => {
+             alert("Login Error: " + error.message);
+          });
+      }
+    </script>
 </body>
 </html>
