@@ -147,94 +147,14 @@
         </div>
     </section>
 
-    <div id="toast" class="toast">Link copied to clipboard!</div>
+<div id="toast" class="toast">Link copied to clipboard!</div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
 
     <script src="script.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
-<script src="firebase-config.js"></script>
-
-<script src="script.js"></script>
-    <script>
-      // ඔයාගේ Firebase Settings
-      const firebaseConfig = {
-        apiKey: "AIzaSyAeERgDlc_KYCrLRCCc_fFbnKdPziuGOCM",
-        authDomain: "kanishka-net.firebaseapp.com",
-        projectId: "kanishka-net",
-        storageBucket: "kanishka-net.firebasestorage.app",
-        messagingSenderId: "667002787187",
-        appId: "1:667002787187:web:faa321ad901fffadbde106",
-        measurementId: "G-L7GLN61TZV"
-      };
-
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-
-      // Login Button Click Event
-      document.getElementById('loginBtn').onclick = function() {
-        const email = document.getElementById('userEmail').value;
-        const statusMsg = document.getElementById('statusMsg');
-
-        if(!email) { 
-            statusMsg.innerText = "Please enter your email first!";
-            statusMsg.style.color = "red";
-            return; 
-        }
-
-        statusMsg.innerText = "Sending link...";
-        statusMsg.style.color = "white";
-
-        const actionCodeSettings = {
-          // GitHub සයිට් එකේ දැනට තියෙන URL එක මෙතනින් ස්වයංක්‍රීයව ගනී
-          url: window.location.href.split('#')[0], 
-          handleCodeInApp: true,
-        };
-
-        auth.sendSignInLinkToEmail(email, actionCodeSettings)
-          .then(() => {
-            window.localStorage.setItem('emailForSignIn', email);
-            statusMsg.innerText = "Success! Check your Email Inbox for the Login Link.";
-            statusMsg.style.color = "var(--accent)";
-            document.getElementById('userEmail').value = ""; // Clear input
-          })
-          .catch((error) => {
-            statusMsg.innerText = "Error: " + error.message;
-            statusMsg.style.color = "red";
-          });
-      };
-
-      // Handle the Login after clicking the link in Email
-      if (auth.isSignInWithEmailLink(window.location.href)) {
-        let email = window.localStorage.getItem('emailForSignIn');
-        
-        // Browser එක වැහිලා තිබුණොත් Email එක අහනවා
-        if (!email) { 
-            email = window.prompt('Please confirm your email to login:'); 
-        }
-
-        auth.signInWithEmailLink(email, window.location.href)
-          .then((result) => {
-            window.localStorage.removeItem('emailForSignIn');
-            
-            // Log වුණාට පස්සේ පෙන්වන කොටස
-            const loginSection = document.getElementById('login').querySelector('.about-card');
-            loginSection.innerHTML = `
-                <h3 style="color: var(--accent); margin-bottom: 10px;">Welcome Back!</h3>
-                <p>You are securely logged in as:</p>
-                <p style="font-weight: bold; font-size: 1.1rem; margin: 10px 0;">${result.user.email}</p>
-                <button class="btn-primary" onclick="firebase.auth().signOut().then(() => location.reload())">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </button>
-            `;
-            alert("සාර්ථකව Log වුණා!");
-          })
-          .catch((error) => {
-             alert("Login Error: " + error.message);
-          });
-      }
-    </script>
-</body>
+    </body>
 </html>
