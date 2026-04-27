@@ -5,44 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanishka Net | Master Hub</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L7GLN61TZV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L7GLN61TZV');
-</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L7GLN61TZV');
+    </script>
     <meta name="description" content="The official mobile-first Master Hub for Kanishka Net. Access videos, apps, and platforms.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Video grid sathi extra styling */
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media(min-width: 768px) {
-            .video-grid { grid-template-columns: 1fr 1fr; }
-        }
-        
-        /* Login Input styling */
-        .glass-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            outline: none;
-            width: 100%;
-            padding: 12px;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 15px;
-        }
-        .glass-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
 <body>
     <div id="loader">
@@ -51,122 +23,109 @@
     </div>
 
     <canvas id="particles"></canvas>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-
-    <nav class="glass-nav">
+    
+    <nav class="glass-nav" id="navbar">
         <div class="logo">Amila_Kanishka</div>
-       <ul class="nav-links">
-    <li><a href="#hub"><i class="fa-solid fa-layer-group"></i> <span>Hub</span></a></li>
-    <li><a href="#videos"><i class="fa-solid fa-circle-play"></i> <span>Videos</span></a></li>
-    <li><a href="#login"><i class="fa-solid fa-user-shield"></i> <span>Login</span></a></li>
-    <li><a href="#about"><i class="fa-solid fa-circle-info"></i> <span>About</span></a></li>
-</ul>
+        <ul class="nav-links">
+            <li><a href="#hub"><i class="fa-solid fa-layer-group"></i> <span>Hub</span></a></li>
+            <li><a href="#videos"><i class="fa-solid fa-circle-play"></i> <span>Videos</span></a></li>
+            <li><a href="#login"><i class="fa-solid fa-user-shield"></i> <span>Login</span></a></li>
+            <li><a href="#about"><i class="fa-solid fa-circle-info"></i> <span>About</span></a></li>
+        </ul>
     </nav>
 
     <header class="hero reveal">
-        <h1 class="neon-title">Kanishka Net</h1>
-        <p class="subtitle">Welcome to Kanishka Net.<br>
-            We provide high-quality technology tutorials,<br>
-            AI tool reviews,<br>
-            and software insights to help you navigate the modern digital world</p>
-        <button class="btn-primary" onclick="location.href='#hub'">
-            <i class="fa-solid fa-rocket"></i> Launch Hub
-        </button>
+        <div class="hero-content">
+            <h1 class="neon-title">Kanishka Net</h1>
+            <p class="subtitle">High-quality technology tutorials, AI tool reviews,<br>
+            and software insights to navigate the digital world.</p>
+            <button class="btn-primary" onclick="location.href='#hub'">
+                <i class="fa-solid fa-play"></i> Launch Hub
+            </button>
+        </div>
+        <div class="hero-fade-bottom"></div>
     </header>
 
-    <section id="hub" class="container reveal">
-        <h2 class="section-title">Command Center</h2>
-        <div class="grid">
-            <a href="#" onclick="openDeepLink('vnd.youtube://www.youtube.com/@kanishkanet', 'https://youtube.com/@kanishkanet?si=uIRQZfYWoVNxTpj0')" class="glass-card link-card">
-                <i class="fa-brands fa-youtube" style="color: #FF0000;"></i>
-                <div class="card-info">
-                    <h3>Kanishka Net YouTube</h3>
-                    <p>Watch our latest uploads</p>
+    <div class="main-content">
+        <section id="hub" class="container reveal">
+            <h2 class="section-title">Command Center</h2>
+            <div class="grid">
+                <a href="#" onclick="openDeepLink('vnd.youtube://www.youtube.com/@kanishkanet', 'https://youtube.com/@kanishkanet?si=uIRQZfYWoVNxTpj0')" class="netflix-card link-card">
+                    <i class="fa-brands fa-youtube" style="color: #E50914;"></i>
+                    <div class="card-info">
+                        <h3>Kanishka Net YouTube</h3>
+                        <p>Watch our latest uploads</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+                </a>
+
+                <a href="#" onclick="openDeepLink('whatsapp://', 'https://whatsapp.com/channel/0029VbCRifW5Ui2d00DILX3c')" class="netflix-card link-card">
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+                    <div class="card-info">
+                        <h3>WhatsApp Channel</h3>
+                        <p>Join the official updates channel</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+                </a>
+
+                <a href="#" class="netflix-card link-card">
+                    <i class="fa-solid fa-download" style="color: var(--primary);"></i>
+                    <div class="card-info">
+                        <h3>Download Resources</h3>
+                        <p>Get the official files</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="videos" class="container reveal">
+            <h2 class="section-title">Latest Transmissions</h2>
+            <div class="video-grid" id="videoGrid">
                 </div>
-                <i class="fa-solid fa-arrow-right card-arrow"></i>
-            </a>
+        </section>
 
-            <a href="#" onclick="openDeepLink('whatsapp://', 'https://whatsapp.com/channel/0029VbCRifW5Ui2d00DILX3c')" class="glass-card link-card">
-                <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
-                <div class="card-info">
-                    <h3>WhatsApp Channel</h3>
-                    <p>Join the official updates channel</p>
+        <section id="login" class="container reveal">
+            <h2 class="section-title">Secure Access</h2>
+            <div class="netflix-card about-card" style="text-align: center;">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Enter your Email for a secure magic login link. No password required.</p>
+                
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <input type="email" id="userEmail" placeholder="Email Address" class="glass-input">
+                    <button id="loginBtn" class="btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fa-solid fa-paper-plane"></i> Send Magic Link
+                    </button>
                 </div>
-                <i class="fa-solid fa-arrow-right card-arrow"></i>
-            </a>
+                
+                <p id="statusMsg" style="margin-top: 20px; font-weight: bold; color: var(--accent);"></p>
+            </div>
+        </section>
 
-            <a href="#" class="glass-card link-card">
-                <i class="fa-solid fa-download" style="color: var(--accent);"></i>
-                <div class="card-info">
-                    <h3>Download Resources</h3>
-                    <p>Get the official files</p>
+        <section id="about" class="container reveal">
+            <div class="netflix-card about-card">
+                <h2 class="section-title">About Us</h2>
+                <p style="color: var(--text-secondary);">Welcome to Kanishka Net. A dedicated Tech Strategist and Content Creator specializing in Software Development, AI Prompt Engineering, and System Optimization. Driven by a passion for the Physical Sciences and ICT, I focus on bridging the gap between high-end technology and creative execution.</p>
+                
+                <h2 class="section-title" style="margin-top: 30px;">Contact</h2>
+                <p>Email: <a href="mailto:nadeeshancloud@gmail.com" class="contact-link">nadeeshancloud@gmail.com</a></p>
+                <p>Phone: <a href="tel:+94743000964" class="contact-link">+94743000964</a></p>
+                
+                <div class="social-row" style="margin-top: 20px;">
+                    <button class="btn-icon" onclick="copyLink()"><i class="fa-solid fa-link"></i> Share Website</button>
                 </div>
-                <i class="fa-solid fa-arrow-right card-arrow"></i>
-            </a>
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
 
-    <section id="videos" class="container reveal">
-        <h2 class="section-title">Latest Transmissions</h2>
-        <div class="video-grid">
-            <div class="glass-card video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/femu3mA-NAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-            <div class="glass-card video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/dmBHvMUfDL8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-            <div class="glass-card video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/u-G33yWO1X0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-            <div class="glass-card video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/Mv7_PDvbaxE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
+    <div style="text-align: center; color: var(--text-secondary); margin: 40px 0 20px; font-family: 'Inter', sans-serif; font-size: 0.9rem;">
+        <p style="margin-bottom: 10px;">Total Hub Visitors</p>
+        <img src="https://hitwebcounter.com/counter/counter.php?page=9452031&style=0005&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter" border="0" style="border-radius: 4px; filter: grayscale(100%) contrast(1.2); opacity: 0.8; transition: var(--transition);" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) contrast(1.2)'; this.style.opacity='0.8'"/>
+    </div>
 
-    <section id="login" class="container reveal">
-        <h2 class="section-title">Secure Access</h2>
-        <div class="glass-card about-card" style="text-align: center;">
-            <p style="margin-bottom: 20px;">Enter your Email for a secure magic login link. No password required.</p>
-            
-            <div style="max-width: 400px; margin: 0 auto;">
-                <input type="email" id="userEmail" placeholder="Enter your Gmail / Email" class="glass-input">
-                <button id="loginBtn" class="btn-primary" style="width: 100%;">
-                    <i class="fa-solid fa-paper-plane"></i> Send Magic Link
-                </button>
-            </div>
-            
-            <p id="statusMsg" style="margin-top: 20px; font-weight: bold; color: var(--accent);"></p>
-        </div>
-    </section>
-
-    <section id="about" class="container reveal">
-        <div class="glass-card about-card">
-            <h2 class="section-title">About Us!</h2>
-            <p>Welcome to Kanishka Net. A dedicated Tech Strategist and Content Creator specializing in Software Development, AI Prompt Engineering, and System Optimization. Driven by a passion for the Physical Sciences and ICT, I focus on bridging the gap between high-end technology and creative execution. Through Kanishka Net, I deliver curated insights and high-performance tools designed to empower the next generation of digital creators and tech enthusiasts, helping them navigate the digital frontier with precision and efficiency.</p>
-            
-            <h2 class="section-title" style="margin-top: 30px;">Contact Us</h2>
-           <p>Email: <a href="mailto:nadeeshancloud@gmail.com" class="contact-link">nadeeshancloud@gmail.com</a></p>
-        <p>Phone: <a href="tel:+94743000964" class="contact-link">+94743000964</a></p>
-            <div class="social-row" style="margin-top: 15px;">
-                <button class="btn-icon" onclick="copyLink()"><i class="fa-solid fa-link"></i> Share Link</button>
-            </div>
-        </div>
-    </section>
-
-<div id="toast" class="toast">Link copied to clipboard!</div>
+    <div id="toast" class="toast">Link copied to clipboard!</div>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-    <script src="firebase-config.js"></script>
-
     <script src="script.js"></script>
-    <div style="text-align: center; color: white; margin: 20px 0; font-family: 'Inter', sans-serif;">
-    <p>Total Visitors</p>
-    <img src="https://hitwebcounter.com/counter/counter.php?page=9452031&style=0005&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter" border="0" />
-</div>
-
-    </body>
+</body>
 </html>
