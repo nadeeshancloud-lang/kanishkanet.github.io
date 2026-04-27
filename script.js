@@ -1,26 +1,19 @@
 // --- 1. LOADER LOGIC ---
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
+    // Loader එක තත්පර 0.5කින් අයින් වීමට මෙහි 500ms ලෙස වෙනස් කර ඇත
     setTimeout(() => {
         loader.style.opacity = '0';
-        setTimeout(() => loader.style.display = 'none', 800);
-    }, 1200); // Wait for progress bar animation
+        setTimeout(() => loader.style.display = 'none', 500);
+    }, 500); 
 });
 
 // --- 2. DEEP LINKING SYSTEM (The "App Launch" Experience) ---
 function openDeepLink(appUri, webFallbackUrl) {
-    // Note: Modern browsers restrict iframe-based deep links. 
-    // The most reliable JS method is attempting to change window.location 
-    // and using a timeout to fallback if the app doesn't intercept it.
     const start = Date.now();
-    
-    // Attempt to open the App Intent URI
     window.location.href = appUri;
 
-    // Fallback to Web URL if app is not installed
     setTimeout(() => {
-        // If the app opened, the browser would have paused execution.
-        // If execution continues rapidly, the app likely wasn't installed.
         if (Date.now() - start < 1500) {
             window.location.href = webFallbackUrl;
         }
@@ -110,9 +103,11 @@ function animateParticles() {
 }
 createParticles();
 animateParticles();
-// Dynamic Video IDs - ඔයාට ඕන වෙලාවක මේ IDs මාරු කරන්න පුළුවන්
+
+// --- 7. DYNAMIC VIDEO LOADING ---
 const videoIDs = ["femu3mA-NAw", "dmBHvMUfDL8", "u-G33yWO1X0", "Mv7_PDvbaxE"];
 
+// HTML එකේ id="videoGrid" ලෙස ඇති div එකට videos ඇතුළු කරයි
 const videoGrid = document.getElementById('videoGrid');
 if (videoGrid) {
     videoGrid.innerHTML = videoIDs.map(id => `
