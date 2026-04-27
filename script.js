@@ -121,3 +121,106 @@ if (videoGrid) {
         </div>
     `).join('');
 }
+const chatContainer = document.getElementById('chat-container');
+const userInput = document.getElementById('user-input');
+
+function handleEnter(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function startNewChat() {
+    chatContainer.innerHTML = `
+        <div class="message ai-message">
+            <img src="logo.ico" alt="Kanishka" class="avatar">
+            <div class="content">Aluth chat ekak patan gamu! Mokakda ada karanne? Thumbnail ekak hadamuda?</div>
+        </div>
+    `;
+}
+
+async function sendMessage() {
+    const text = userInput.value.trim();
+    if (!text) return;
+
+    // User ගේ Message එක පෙන්නීම
+    appendMessage('user', text);
+    userInput.value = '';
+
+    // Loading Effect එක දැමීම
+    const loadingId = 'loading-' + Date.now();
+    appendLoading(loadingId);
+
+    try {
+        // Vercel Backend එකට කතා කිරීම
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        
+        // Loading එක අයින් කරලා Typewriter Effect එකෙන් උත්තරය දීම
+        document.getElementById(loadingId).remove();
+        typeWriterEffect(data.reply);
+
+    } catch (error) {
+        document.getElementById(loadingId).remove();
+        typeWriterEffect("Apo yaluve, connection eke podi aulk. Poddak inna ayeth balanna.");
+    }
+}
+
+function appendMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${sender}-message`;
+    
+    if (sender === 'user') {
+        msgDiv.innerHTML = `<div class="content">${text}</div>`;
+    }
+    
+    chatContainer.appendChild(msgDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function appendLoading(id) {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'message ai-message';
+    loadingDiv.id = id;
+    loadingDiv.innerHTML = `
+        <img src="logo.ico" alt="Kanishka" class="avatar">
+        <div class="content loading-dots">
+            <span></span><span></span><span></span>
+        </div>
+    `;
+    chatContainer.appendChild(loadingDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// අකුරෙන් අකුර Type වෙන Effect එක
+function typeWriterEffect(text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message ai-message';
+    
+    const img = document.createElement('img');
+    img.src = 'logo.ico';
+    img.className = 'avatar';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'content';
+    
+    msgDiv.appendChild(img);
+    msgDiv.appendChild(contentDiv);
+    chatContainer.appendChild(msgDiv);
+
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            contentDiv.innerHTML += text.charAt(i);
+            i++;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            setTimeout(type, 15); // අකුරු වැටෙන වේගය (15ms)
+        }
+    }
+    type();
+}
