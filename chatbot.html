@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KANISHKA AI | Master Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00E5FF;
+            --secondary: #7B2EFF;
+            --bg-deep: #0A0A0F;
+            --glass: rgba(18, 18, 26, 0.85);
+            --bot-msg: rgba(0, 229, 255, 0.1);
+            --user-msg: linear-gradient(45deg, var(--secondary), var(--primary));
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at top right, rgba(123, 46, 255, 0.15), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.15), transparent 40%);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .chat-header {
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .chat-header .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover { color: var(--primary); transform: translateX(-3px); }
+
+        /* Chat Area */
+        #chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .message-wrapper {
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        .message-wrapper.user { align-items: flex-end; }
+        .message-wrapper.bot { align-items: flex-start; }
+
+        .message {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: var(--user-msg);
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 5px 15px rgba(123, 46, 255, 0.3);
+            color: white;
+        }
+
+        .message.bot {
+            background: var(--glass);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-bottom-left-radius: 5px;
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.05);
+        }
+
+        /* Code Block Styling inside Bot Messages */
+        .message.bot pre {
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            margin: 10px 0;
+        }
+        .message.bot code { font-family: monospace; color: #00E5FF; }
+
+        .uploaded-img {
+            max-width: 200px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--primary);
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 20px;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .file-upload-wrapper { position: relative; }
+        #fileInput { display: none; }
+        .upload-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: 0.3s;
+        }
+        .upload-btn:hover { background: rgba(0, 229, 255, 0.2); color: var(--primary); }
+
+        .text-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        input[type="text"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .send-btn {
+            background: var(--user-msg);
+            border: none;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 15px rgba(123, 46, 255, 0.4);
+        }
+        .send-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px rgba(0, 229, 255, 0.6); }
+
+        /* Typing Indicator */
+        .typing { display: flex; gap: 5px; padding: 10px 15px; }
+        .dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: blink 1.4s infinite both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes blink { 0%, 80%, 100% { transform: scale(0); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px var(--primary); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 10px; }
+
+        #imagePreview {
+            display: none; position: absolute; bottom: 70px; left: 20px;
+            background: var(--glass); padding: 5px; border-radius: 10px; border: 1px solid var(--primary);
+        }
+        #imagePreview img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; }
+        #imagePreview .remove-img { position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; text-align: center; cursor: pointer; font-size: 12px; line-height: 20px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="chat-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="title">
+            <i class="fa-solid fa-microchip" style="font-size: 1.5rem; color: var(--primary);"></i>
+            <h1>KANISHKA AI</h1>
+        </div>
+        <div style="width: 24px;"></div> </div>
+
+    <div id="chat-box">
+        <div class="message-wrapper bot">
+            <div class="message bot">
+                Hi, I'm Kanishka! Welcome to the Master Hub. What are we building or solving today? 🚀
+            </div>
+        </div>
+    </div>
+
+    <div id="imagePreview">
+        <img id="previewImg" src="" alt="Preview">
+        <div class="remove-img" onclick="removeImage()">✖</div>
+    </div>
+
+    <div class="input-area">
+        <div class="file-upload-wrapper">
+            <label for="fileInput" class="upload-btn" title="Upload Image/Code snippet">
+                <i class="fa-solid fa-paperclip"></i>
+            </label>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+        
+        <div class="text-input-wrapper">
+            <input type="text" id="userInput" placeholder="Ask anything, Machan..." autocomplete="off" onkeypress="handleEnter(event)">
+        </div>
+
+        <button class="send-btn" onclick="sendMessage()">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const API_KEY = "AIzaSyD7fNKrPfTJucaqaIwshL8V9k6qe1Xm228"; 
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+        const SYSTEM_INSTRUCTION = `ROLE & IDENTITY:
+You are "KANISHKA AI", the official digital clone and AI representative of Kanishka. You are not a generic AI; you adopt the exact persona of a 17-year-old tech content creator, software developer, and Advanced Level (Physical Science) student residing in Anuradhapura, Sri Lanka. 
+
+BACKGROUND & KNOWLEDGE BASE:
+- You are the mastermind behind "Kanishka Net" (tech tutorials, software insights) and other creative channels.
+- You have a strong background in ICT, Combined Mathematics, and Physics.
+- You are highly skilled in web development (HTML, CSS, JS), building and deploying Node.js WhatsApp bots, and utilizing hosting platforms like GitHub Pages, Vercel, and Firebase.
+- You are experienced in PC hardware troubleshooting, Windows configuration, and gaming (emulators, optimization).
+- You are an expert in AI Prompt Engineering, generating master prompts for hyper-realistic images and music.
+
+TONE & PERSONALITY:
+- Speak confidently, naturally, and friendly, exactly like a tech-savvy Sri Lankan teenager. 
+- You are helpful but straight to the point. You love sharing your technical knowledge.
+- Language: You seamlessly understand English, Sinhala, and Singlish. Reply in the language the user uses. If they use Singlish, reply in very natural, colloquial Singlish. 
+- Never refer to yourself as a "Large Language Model" or "Google AI". You are KANISHKA.
+
+CORE CAPABILITIES & BEHAVIORS:
+1. Code Generation: Write clean, highly optimized, and modern code (HTML/CSS/JS, Node.js, Python, etc.) when requested. Always explain the code simply.
+2. Troubleshooting: Analyze errors logically and provide step-by-step fixes, just like a developer would.
+3. File & Media Handling: Acknowledge and process uploaded files, images, or code snippets provided by the user and give accurate insights.
+4. Limits: If asked deeply personal questions about your family or sensitive offline matters, politely pivot back to technology, education, or your digital creations.`;
+
+        let chatHistory = [];
+        let base64Image = null;
+        let mimeType = null;
+
+        // --- IMAGE HANDLING ---
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    base64Image = event.target.result.split(',')[1];
+                    mimeType = file.type;
+                    previewImg.src = event.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function removeImage() {
+            base64Image = null;
+            mimeType = null;
+            fileInput.value = "";
+            imagePreview.style.display = 'none';
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        // --- FORMATTING (Bold & Code blocks) ---
+        function formatResponse(text) {
+            // Format Code blocks
+            let formatted = text.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            // Format bold text
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Format line breaks
+            formatted = formatted.replace(/\n/g, '<br>');
+            return formatted;
+        }
+
+        // --- SEND MESSAGE LOGIC ---
+        async function sendMessage() {
+            const inputField = document.getElementById('userInput');
+            const chatBox = document.getElementById('chat-box');
+            const message = inputField.value.trim();
+
+            if (message === "" && !base64Image) return;
+
+            // 1. Show User Message
+            let userHtml = `<div class="message-wrapper user"><div class="message user">`;
+            if (base64Image) {
+                userHtml += `<img src="data:${mimeType};base64,${base64Image}" class="uploaded-img"><br>`;
+            }
+            if (message) userHtml += message;
+            userHtml += `</div></div>`;
+            chatBox.innerHTML += userHtml;
+            
+            // Clear inputs
+            inputField.value = "";
+            let currentImgData = base64Image ? { mimeType, data: base64Image } : null;
+            removeImage();
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 2. Add History
+            let userParts = [];
+            if (message) userParts.push({ text: message });
+            if (currentImgData) {
+                userParts.push({
+                    inline_data: { mime_type: currentImgData.mimeType, data: currentImgData.data }
+                });
+            }
+            chatHistory.push({ role: "user", parts: userParts });
+
+            // 3. Show Typing Indicator
+            const typingId = "typing-" + Date.now();
+            chatBox.innerHTML += `
+                <div id="${typingId}" class="message-wrapper bot">
+                    <div class="message bot typing">
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                    </div>
+                </div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 4. API Call
+            try {
+                const response = await fetch(GEMINI_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+                        contents: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+                document.getElementById(typingId).remove();
+
+                if (data.candidates && data.candidates.length > 0) {
+                    const botReply = data.candidates[0].content.parts[0].text;
+                    chatHistory.push({ role: "model", parts: [{ text: botReply }] });
+                    
+                    chatBox.innerHTML += `
+                        <div class="message-wrapper bot">
+                            <div class="message bot">${formatResponse(botReply)}</div>
+                        </div>`;
+                } else {
+                    throw new Error("Empty response from AI");
+                }
+            } catch (error) {
+                document.getElementById(typingId).remove();
+                chatBox.innerHTML += `
+                    <div class="message-wrapper bot">
+                        <div class="message bot" style="color: #FF2ED1;">Oops! Connection issue or limits reached. Hada ganna poddak wela yai. (Error: ${error.message})</div>
+                    </div>`;
+            }
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
