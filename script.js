@@ -4,32 +4,33 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         loader.style.opacity = '0';
         setTimeout(() => loader.style.display = 'none', 800);
-    }, 1200); // Wait for progress bar animation
+    }, 1200);
 });
 
-// --- 2. DEEP LINKING SYSTEM (The "App Launch" Experience) ---
-function openDeepLink(appUri, webFallbackUrl) {
-    // Note: Modern browsers restrict iframe-based deep links. 
-    // The most reliable JS method is attempting to change window.location 
-    // and using a timeout to fallback if the app doesn't intercept it.
-    const start = Date.now();
-    
-    // Attempt to open the App Intent URI
-    window.location.href = appUri;
+// --- 2. NETFLIX STYLE STICKY NAVBAR ---
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
 
-    // Fallback to Web URL if app is not installed
+// --- 3. DEEP LINKING SYSTEM ---
+function openDeepLink(appUri, webFallbackUrl) {
+    const start = Date.now();
+    window.location.href = appUri;
     setTimeout(() => {
-        // If the app opened, the browser would have paused execution.
-        // If execution continues rapidly, the app likely wasn't installed.
         if (Date.now() - start < 1500) {
             window.location.href = webFallbackUrl;
         }
     }, 1000);
 }
 
-// --- 3. SCROLL REVEAL ANIMATIONS ---
+// --- 4. SCROLL REVEAL ANIMATIONS ---
 const revealElements = document.querySelectorAll('.reveal');
-const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 
 const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -42,11 +43,6 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 
-// --- 4. SMOOTH SCROLL ---
-function scrollToHub() {
-    document.getElementById('hub').scrollIntoView({ behavior: 'smooth' });
-}
-
 // --- 5. MICRO-INTERACTIONS (Copy Link) ---
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -56,7 +52,18 @@ function copyLink() {
     });
 }
 
-// --- 6. FLOATING PARTICLES (Canvas Background) ---
+// --- 6. DYNAMIC VIDEO LOADING ---
+const videoIDs = ["femu3mA-NAw", "dmBHvMUfDL8", "u-G33yWO1X0", "Mv7_PDvbaxE"];
+const videoGrid = document.getElementById('videoGrid');
+if (videoGrid) {
+    videoGrid.innerHTML = videoIDs.map(id => `
+        <div class="video-container">
+            <iframe height="250" src="https://www.youtube.com/embed/${id}?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    `).join('');
+}
+
+// --- 7. OPTIMIZED PARTICLES (High Speed Canvas) ---
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particlesArray = [];
@@ -72,10 +79,10 @@ class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-        this.color = Math.random() > 0.5 ? '#00E5FF' : '#7B2EFF';
+        this.size = Math.random() * 1.5;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.color = Math.random() > 0.5 ? '#00E5FF' : '#444'; // Subtle colors
     }
     update() {
         this.x += this.speedX;
@@ -85,7 +92,7 @@ class Particle {
     }
     draw() {
         ctx.fillStyle = this.color;
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.3;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -94,7 +101,8 @@ class Particle {
 
 function createParticles() {
     particlesArray = [];
-    let numberOfParticles = (canvas.width * canvas.height) / 15000;
+    // Reduced particle count for better mobile performance
+    let numberOfParticles = (canvas.width * canvas.height) / 20000; 
     for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
     }
@@ -110,14 +118,3 @@ function animateParticles() {
 }
 createParticles();
 animateParticles();
-// Dynamic Video IDs - ඔයාට ඕන වෙලාවක මේ IDs මාරු කරන්න පුළුවන්
-const videoIDs = ["femu3mA-NAw", "dmBHvMUfDL8", "u-G33yWO1X0", "Mv7_PDvbaxE"];
-
-const videoGrid = document.getElementById('videoGrid');
-if (videoGrid) {
-    videoGrid.innerHTML = videoIDs.map(id => `
-        <div class="glass-card video-container reveal">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>
-        </div>
-    `).join('');
-}
