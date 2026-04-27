@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanishka AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="top-actions">
+                <button class="new-chat-btn" onclick="startNewChat()">
+                    <i class="fas fa-plus"></i> New chat
+                </button>
+            </div>
+            <div class="recent-section">
+                <p class="section-title">Recent</p>
+                <div class="history-list" id="history-list">
+                    <div class="history-item active">
+                        <i class="far fa-message"></i> YouTube Logo Design
+                    </div>
+                    <div class="history-item">
+                        <i class="far fa-message"></i> Thumbnail Prompts
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-actions">
+                <div class="action-item"><i class="fas fa-cog"></i> Settings</div>
+                <div class="action-item"><i class="fas fa-history"></i> Activity</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h2>Kanishka AI <span class="badge">Pro</span></h2>
+            </div>
+            
+            <div class="chat-container" id="chat-container">
+                <div class="message ai-message">
+                    <img src="logo.ico" alt="Kanishka" class="avatar">
+                    <div class="content">Kohomada Yaluve! Mama Kanishka. YouTube Thumbnails, Logos, SEO ganna hari, Code awulak hari thiyenawa nam ahanna. Kohomada udaw karanna one?</div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-box">
+                    <input type="text" id="user-input" placeholder="Ask Kanishka anything..." onkeypress="handleEnter(event)">
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="footer-text">Kanishka AI can help with your creative projects. Always verify technical code.</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
