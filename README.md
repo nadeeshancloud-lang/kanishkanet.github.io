@@ -1,4 +1,4 @@
-# 🚀 Welcome to Nexus | Kanishka Net ⚡
+<center> # 🚀 Welcome to Nexus | Kanishka Net ⚡</center>
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/render?type=waving&color=gradient&width=1000&height=200&section=header&text=Kanishka%20Net%20Hub&fontSize=50&animation=fadeIn&fontAlignY=38" />
@@ -47,6 +47,7 @@ I'm a **Software Developer** and **Tech Content Creator** from Sri Lanka 🇱�
 ---
 
 ### 🌐 Connect with Me
+<P> <//> Amila Kanishka Nadeeshan <//> </P>
 <p align="left">
-  <a href="https://kanishkanet.online" target="_blank">
-    <img src="https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white" />
+ 👉 <a href="https://kanishkanet.online" target="_blank">
+ 👉   <img src="https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white" />
