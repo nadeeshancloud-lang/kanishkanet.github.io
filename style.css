@@ -486,3 +486,25 @@ body {
     .sidebar { display: none; } /* Mobile වලදී sidebar එක හංගමු */
     .header, .chat-container, .input-container { padding: 15px 5%; }
 }
+.nexus-btn {
+    background: linear-gradient(45deg, #ff0000, #990000); /* ඔයාගේ ලෝගෝ එකේ පාටට ගැලපෙන්න රතු පාට */
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); /* පොඩි shadow එකක් */
+}
+
+.nexus-btn:hover {
+    background: transparent;
+    border: 2px solid #ff0000;
+    color: #ff0000 !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); /* Hover කරද්දී Glow වෙනවා */
+    transform: translateY(-3px); /* උඩට පොඩ්ඩක් ඉස්සෙනවා */
+}
