@@ -1,4 +1,4 @@
-<center> # 🚀 Welcome to Nexus | Kanishka Net ⚡</center>
+# 🚀 Welcome to Nexus | Kanishka Net ⚡
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/render?type=waving&color=gradient&width=1000&height=200&section=header&text=Kanishka%20Net%20Hub&fontSize=50&animation=fadeIn&fontAlignY=38" />
