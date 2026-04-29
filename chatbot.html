@@ -1644,7 +1644,7 @@ body {
       <div class="login-text-filler">
         Experience seamless conversations and creative image generation powered by cutting-edge AI. 
         Whether you are analyzing complex data, generating art, or just chatting, 
-        ShamodFirezz provides a secure, fast, and intelligent environment tailored to your needs.
+        Kanishka net-AI provides a secure, fast, and intelligent environment tailored to your needs.
         <br>
         model : 2.00.561
         <br><br>
@@ -1797,7 +1797,7 @@ body {
       <div class="input-box">
         <textarea 
           id="chat-input" 
-          placeholder="Message ShamodFirezz..." 
+          placeholder="Message Kanishka net-AI..." 
           rows="1"
           maxlength="8000"
         ></textarea>
@@ -2290,7 +2290,7 @@ function renderMessage(role, content, animate = true) {
     : '👁';
 
   const avatarStyle = isUser ? `background: var(--accent-grad); color:white; ${user?.picture ? 'background:none;' : ''}` : '';
-  const authorName = isUser ? (user?.name || 'You') : 'ShamodFirezz';
+  const authorName = isUser ? (user?.name || 'You') : 'Kanishka net-AI';
 
   const wrapper = document.createElement('div');
   wrapper.className = `message ${role}`;
@@ -2350,7 +2350,7 @@ function addTypingIndicator() {
   div.innerHTML = `
     <div class="msg-avatar">👁</div>
     <div class="msg-body">
-      <div class="msg-header"><span class="msg-author">ShamodFirezz</span></div>
+      <div class="msg-header"><span class="msg-author">Kanishka net-AI</span></div>
       <div class="msg-content">
         <div class="typing-indicator">
           <div class="typing-dot"></div>
@@ -2387,7 +2387,7 @@ function toggleImageMode() {
     showToast('Image generation mode enabled', 'info');
   } else {
     btn.classList.remove('active');
-    input.placeholder = 'Message ShamodFirezz...';
+    input.placeholder = 'Message Kanishka net-AI...';
   }
 }
 
@@ -2547,7 +2547,7 @@ async function generateImage(prompt) {
           'Authorization': 'Bearer ' + STATE.settings.apiKey,
           'Content-Type': 'application/json',
           'HTTP-Referer': window.location.href,
-          'X-Title': 'ShamodFirezz'
+          'X-Title': 'Kanishka net-AI'
         },
         body: JSON.stringify({
           model: STATE.settings.imageModel || 'stabilityai/stable-diffusion-xl',
@@ -2597,7 +2597,7 @@ function closeImageModal() {
 function downloadImage(url, prompt) {
   const link = document.createElement('a');
   link.href = url;
-  link.download = `ShamodFirezz-image-${Date.now()}.png`;
+  link.download = `Kanishka net-AI-image-${Date.now()}.png`;
   link.target = '_blank';
   document.body.appendChild(link);
   link.click();
@@ -2710,7 +2710,7 @@ async function sendToAPI(userContent, addedToHistory) {
         'Authorization': `Bearer ${STATE.settings.apiKey}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': window.location.href,
-        'X-Title': 'ShamodFirezz'
+        'X-Title': 'Kanishka net-AI'
       },
       body: JSON.stringify({
         model: STATE.settings.model || 'openai/gpt-4o-mini',
@@ -3043,7 +3043,7 @@ document.getElementById('newChatBtn').addEventListener('click', () => {
   STATE.activeConvId = null;
   STATE.isImageMode = false;
   document.getElementById('imageGenBtn').classList.remove('active');
-  document.getElementById('chat-input').placeholder = 'Message ShamodFirezz...';
+  document.getElementById('chat-input').placeholder = 'Message   Kanishka net-AI...';
   showWelcomeScreen();
   renderHistoryList();
   closeSidebar();
@@ -3103,7 +3103,7 @@ guestBtn.addEventListener('touchend', (e) => {
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  if (confirm('Sign out of ShamodFirezz?')) logout();
+  if (confirm('Sign out of Kanishka net-AI?')) logout();
 });
 
 document.getElementById('searchInput').addEventListener('input', (e) => {
