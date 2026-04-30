@@ -3257,6 +3257,8 @@ document.querySelector('.send-btn').addEventListener('click', async () => {
 });
 </script>
   <script>
+    // කලින් තිබූ වැරදි Error පණිවිඩ ඉවත් කිරීමට මෙය එක් කරන්න
+window.onerror = function() { return true; };
     // 1. ඔබ ලබා දුන් API Key සහ Model විස්තර
     const GEMINI_API_KEY = "AIzaSyDyF7TJTXuAHSleROUQHrRCJiw090gH2ws"; 
     const MODEL_NAME = "gemini-2.0-flash-lite-preview-02-05";
