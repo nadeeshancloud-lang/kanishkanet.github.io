@@ -3256,5 +3256,89 @@ document.querySelector('.send-btn').addEventListener('click', async () => {
     console.log("AI පිළිතුර:", aiResponse);
 });
 </script>
+  <script>
+    // 1. ඔබ ලබා දුන් API Key සහ Model විස්තර
+    const GEMINI_API_KEY = "AIzaSyDyF7TJTXuAHSleROUQHrRCJiw090gH2ws"; 
+    const MODEL_NAME = "gemini-2.0-flash-lite-preview-02-05";
+
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.querySelector('.send-btn');
+    const chatMessages = document.querySelector('.chat-messages');
+
+    // 2. AI එකෙන් පිළිතුරු ලබාගන්නා Function එක
+    async function getGeminiResponse(userText) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`;
+        
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: userText }] }]
+                })
+            });
+
+            const data = await response.json();
+            
+            if (data.error) {
+                return `❌ API Error: ${data.error.message}`;
+            }
+            
+            return data.candidates[0].content.parts[0].text;
+        } catch (error) {
+            return "❌ සම්බන්ධතාවයේ දෝෂයකි. කරුණාකර නැවත උත්සාහ කරන්න.";
+        }
+    }
+
+    // 3. පණිවිඩ තිරය මත පෙන්වන ආකාරය (UI එකට ගැළපෙන ලෙස)
+    function appendMessage(role, text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${role}`;
+        
+        // Markdown භාවිතා කර පිළිතුර ලස්සන කිරීම (ඔබේ HTML හි ඇති marked.js හරහා)
+        const formattedText = role === 'assistant' ? marked.parse(text) : text;
+
+        msgDiv.innerHTML = `
+            <div class="msg-avatar">${role === 'user' ? '👤' : 'AI'}</div>
+            <div class="msg-body">
+                <div class="msg-header">
+                    <span class="msg-author">${role === 'user' ? 'ඔබ' : 'Kanishka Net AI'}</span>
+                </div>
+                <div class="msg-content">${formattedText}</div>
+            </div>
+        `;
+        
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Code highlight කිරීම (ඔබේ HTML හි ඇති highlight.js හරහා)
+        if (role === 'assistant') {
+            msgDiv.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+    }
+
+    // 4. Send Button එක Click කිරීම
+    sendBtn.addEventListener('click', async () => {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        appendMessage('user', text);
+        chatInput.value = '';
+        
+        // AI එක පිළිතුරු දෙන තෙක් 'Typing' පණිවිඩයක් පෙන්විය හැක (Optional)
+        const aiResponse = await getGeminiResponse(text);
+        appendMessage('assistant', aiResponse);
+    });
+
+    // 5. Enter Key එක එබූ විට පණිවිඩය යැවීම
+    chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendBtn.click();
+        }
+    });
+</script>
 </body>
 </html>
