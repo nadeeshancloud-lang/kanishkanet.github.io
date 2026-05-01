@@ -64,32 +64,26 @@
         </div>
     </div>
 
-    <script type="module" src="auth-script.js"></script>
-    <script type="module">
-  // Firebase App සහ Authentication සඳහා අවශ්‍ය Libraries ගෙන්වා ගැනීම
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-analytics.js";
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // ඔයාගේ Firebase Configuration එක
+  // Your web app's Firebase configuration
   const firebaseConfig = {
-    apiKey: "AIzaSyBRlUe7geXrWJcOhq4du0mqYJ0CrxIu0nA",
-    authDomain: "nishkanet-web.firebaseapp.com",
-    projectId: "nishkanet-web",
-    storageBucket: "nishkanet-web.firebasestorage.app",
-    messagingSenderId: "1060254261120",
-    appId: "1:1060254261120:web:31196100375542124f2b65",
-    measurementId: "G-ST90RCTB87"
+    apiKey: "AIzaSyD7hHeJfN7uhSibgFEv9Kfk534Qv-3v4oo",
+    authDomain: "loginkanishka.firebaseapp.com",
+    databaseURL: "https://loginkanishka-default-rtdb.firebaseio.com",
+    projectId: "loginkanishka",
+    storageBucket: "loginkanishka.firebasestorage.app",
+    messagingSenderId: "1096061058024",
+    appId: "1:1096061058024:web:f1973799a1393c98c0c25d"
   };
 
-  // Firebase Initialize කිරීම
+  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app); // Authentication පාවිච්චි කරන්න මේක ඕනේ
-  const analytics = getAnalytics(app);
-
-  console.log("Firebase සාර්ථකව සම්බන්ධ වුණා!");
-
-  // මීට පස්සේ ඔයා ලියන Login/Sign-up functions මේ ඇතුළෙම ලියන්න පුළුවන්
 </script>
+    
 </body>
 </html>
