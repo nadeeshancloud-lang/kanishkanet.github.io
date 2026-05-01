@@ -508,65 +508,58 @@ body {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); /* Hover කරද්දී Glow වෙනවා */
     transform: translateY(-3px); /* උඩට පොඩ්ඩක් ඉස්සෙනවා */
 }
-/* 1. මූලික වර්ණ (Variables) - මේවා අනිවාර්යයෙන්ම අවශ්‍යයි */
-:root {
-  --color-primary: #00cfff;
-  --color-secondary: #0a0a0a;
-  --color-accent: #00f2ff;
+/* --- Utility Mapping for Feedback, Footer & WhatsApp Button --- */
+
+/* Colors based on your variables */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+
+/* Opacity variants for backgrounds and text */
+.bg-primary\/10 { background-color: rgba(0, 207, 255, 0.1); }
+.bg-white\/5 { background-color: rgba(255, 255, 255, 0.05); }
+.border-white\/5 { border-color: rgba(255, 255, 255, 0.05); }
+.border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+.text-white\/40 { color: rgba(255, 255, 255, 0.4); }
+.text-white\/60 { color: rgba(255, 255, 255, 0.6); }
+.text-white\/20 { color: rgba(255, 255, 255, 0.2); }
+
+/* WhatsApp Ping Animation */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* 2. Feedback සහ Footer සඳහා අවශ්‍ය වන Glassmorphism Style */
-.glass {
-  background-color: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+/* Specific styling for Form elements in Feedback Section */
+input, select, textarea {
+  color: white;
+  font-family: inherit;
 }
 
-.glass-blue {
-  background-color: rgba(0, 207, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 207, 255, 0.2);
-  box-shadow: 0 0 20px rgba(0,207,255,0.15);
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
 }
 
-/* 3. Heading සඳහා Neon Glow එක */
-.neon-glow {
-  text-shadow: 0 0 10px rgba(0, 207, 255, 0.5), 0 0 20px rgba(0, 207, 255, 0.3);
+/* Hover effects for Footer links & Social icons */
+.hover\:text-primary:hover {
+  color: var(--color-primary);
 }
 
-/* 4. WhatsApp Button එකට අවශ්‍ය වන Floating Animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+.hover\:scale-105:hover { transform: scale(1.05); }
+.active\:scale-95:active { transform: scale(0.95); }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* 5. Section සහ Footer එක scroll වෙද්දී එන Fade-in Animations */
-.scroll-fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-fade.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* (අවශ්‍ය නම් පමණක්) පැත්තකින් එන animations */
-.scroll-fade-right {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-fade-right.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+/* Layout & Spacing Helpers (If Tailwind is not used) */
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 1rem; }
+.rounded-full { border-radius: 9999px; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
