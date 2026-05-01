@@ -158,7 +158,115 @@
             <p id="statusMsg" style="margin-top: 20px; font-weight: bold; color: var(--accent);"></p>
         </div>
     </section>
+                  <!-- Feedback Section -->
+            <section id="feedback" class="py-32 px-4 scroll-fade">
+            <div class="max-w-4xl mx-auto glass p-10 md:p-16 rounded-[3rem] border border-white/5 relative overflow-hidden">
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+                
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Your Voice <span class="text-primary italic">Matters</span></h2>
+                    <p class="text-white/40">Share your ideas, report issues, or suggest new features for Kanishka Net.</p>
+                </div>
 
+                <form class="space-y-6 relative z-10" onsubmit="event.preventDefault()">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-white/40 ml-1">Full Name</label>
+                            <input type="text" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-primary/50 transition-colors" placeholder="Kanishka Nadeeshan">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-white/40 ml-1">Email Address</label>
+                            <input type="email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-primary/50 transition-colors" placeholder="example@gmail.com">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-white/40 ml-1">Feedback Category</label>
+                        <select class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-primary/50 transition-colors appearance-none text-white/60">
+                            <option>General Feedback</option>
+                            <option>Feature Suggestion</option>
+                            <option>Bug Report</option>
+                            <option>Partnership</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-white/40 ml-1">Your Message</label>
+                        <textarea rows="4" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-primary/50 transition-colors resize-none" placeholder="How can we improve..."></textarea>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-2 text-primary/40">
+                            <i data-lucide="star" class="w-5 h-5 fill-current transition-colors cursor-pointer hover:text-primary"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current transition-colors cursor-pointer hover:text-primary"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current transition-colors cursor-pointer hover:text-primary"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current transition-colors cursor-pointer hover:text-primary"></i>
+                            <i data-lucide="star" class="w-5 h-5 transition-colors cursor-pointer hover:text-primary hover:fill-current"></i>
+                            <span class="ml-2 text-sm text-white/40 italic">Rating (4.0)</span>
+                        </div>
+                        <button class="w-full md:w-auto px-10 py-4 bg-primary text-secondary font-bold rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(0,207,255,0.3)]">
+                            Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    <!-- Footer -->
+    <footer class="pt-24 pb-12 px-4 border-t border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-20">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://raw.githubusercontent.com/nadeeshancloud-lang/kanishkanet.github.io/main/logo.ico" alt="Logo" class="w-10 h-10 rounded-full">
+                        <span class="text-2xl font-bold neon-glow">Kanishka <span class="text-primary italic">Net</span></span>
+                    </div>
+                    <p class="text-white/40 max-w-sm mb-8 leading-relaxed">
+                        Empowering the digital era with advanced AI solutions, creative content, and a 
+                        community-driven tech ecosystem.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <a href="https://youtube.com/@kanishkanet" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                        <a href="https://whatsapp.com/channel/0029VbCRifW5Ui2d00DILX3c" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:text-primary transition-colors"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Platform</h4>
+                    <ul class="space-y-4 text-white/40 font-medium">
+                        <li><a href="#hub" class="hover:text-primary transition-colors">AI Assistant</a></li>
+                        <li><a href="#hub" class="hover:text-primary transition-colors">Pix Editor</a></li>
+                        <li><a href="#videos" class="hover:text-primary transition-colors">Video Hub</a></li>
+                        <li><a href="#feedback" class="hover:text-primary transition-colors">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Legal</h4>
+                    <ul class="space-y-4 text-white/40 font-medium">
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-12 border-t border-white/5 text-center relative">
+                <p class="text-white/20 text-sm mb-4">
+                    All Rights Reserved © 2026 <span class="text-white font-semibold">Kanishka Net</span>
+                </p>
+                <p class="text-sm font-medium text-white/40 flex items-center justify-center gap-2">
+                    Made with <i data-lucide="star" class="w-3.5 h-3.5 text-primary fill-current"></i> by <span class="text-primary/80 neon-glow">Amila Kanishka Nadeeshan</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Channel Button -->
+    <a href="https://whatsapp.com/channel/0029VbCRifW5Ui2d00DILX3c" target="_blank" class="fixed bottom-8 right-8 z-[90] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all group">
+        <div class="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-20"></div>
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+        <span class="absolute right-full mr-4 px-4 py-2 glass rounded-xl text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Join WhatsApp Channel
+        </span>
+    </a>
+    
     <section id="about" class="container reveal">
         <div class="glass-card about-card">
             <h2 class="section-title">About Us!</h2>
