@@ -6,24 +6,8 @@
     <title>Nexus | Secure Access</title>
     <link rel="stylesheet" href="auth-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- 1. අලුතින් එකතු කළ කොටස: Tailwind CSS සහ Lucide Icons -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="fade-in">
-
-    <!-- 2. අලුතින් එකතු කළ පළමු කේතය (Top-Right වලට සකසා ඇත) -->
-    <div class="absolute top-5 right-5 z-50 flex items-center gap-4">
-        <div id="auth-container-top">
-            <button id="auth-btn" class="flex items-center gap-2 px-6 py-2 bg-blue-500/10 border border-blue-500/30 text-blue-500 rounded-full font-medium hover:bg-blue-500 hover:text-white transition-all duration-300">
-                <i data-lucide="log-in" class="w-4 h-4"></i>
-                <span>Log In</span>
-            </button>
-        </div>
-    </div>
-    <!-- පළමු කේතය අවසන් -->
-
     <div id="particles"></div>
 
     <div class="auth-container">
@@ -79,11 +63,6 @@
             </div>
         </div>
     </div>
-
-    <!-- 3. අලුතින් එකතු කළ කොටස: Lucide Icons Load කිරීම -->
-    <script>
-      lucide.createIcons();
-    </script>
 
     <script type="module" src="auth-script.js"></script>
     <script type="module">
