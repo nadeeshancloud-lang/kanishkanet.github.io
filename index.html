@@ -189,56 +189,199 @@
 
     <script src="firebase-config.js"></script>
 
-<!-- ===== ADVANCED TOTAL VISITORS COUNTER ===== -->
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-
-<section class="visitor-section">
+    <script src="script.js"></script>
+    <!-- RGB Digital Visitor Counter -->
+<div class="visitor-clock-wrap">
     
-    <!-- Animated Background -->
-    <div class="visitor-bg"></div>
-    <div class="visitor-particles"></div>
+    <div class="visitor-clock">
+        <div class="clock-label">TOTAL VISITORS</div>
 
-    <!-- Main Card -->
-    <div class="visitor-card">
-
-        <!-- Top Glow -->
-        <div class="top-glow"></div>
-
-        <!-- Icon -->
-        <div class="visitor-icon">
-            <i class="fa-solid fa-chart-line"></i>
+        <div class="digital-counter">
+            <span id="digit1">0</span>
+            <span id="digit2">0</span>
+            <span id="digit3">0</span>
+            <span id="digit4">0</span>
+            <span id="digit5">0</span>
         </div>
 
-        <!-- Title -->
-        <h2 class="visitor-title">TOTAL VISITORS</h2>
-
-        <!-- Counter -->
-        <div class="counter-wrapper">
-
-            <div class="digit">0</div>
-            <div class="digit">7</div>
-            <div class="digit">8</div>
-            <div class="digit">3</div>
-            <div class="digit">3</div>
-
+        <div class="copyright">
+            © 2026 Kanishka Net. All Rights Reserved.
         </div>
-
-        <!-- Online Status -->
-        <div class="status-box">
-            <span class="status-dot"></span>
-            <span>LIVE TRACKING ENABLED</span>
-        </div>
-
-        <!-- Bottom Text -->
-        <p class="copyright">
-            © 2026 <span>Kanishka Net</span>. All Rights Reserved.
-        </p>
-
     </div>
 
-</section>
 </div>
-</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+.visitor-clock-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:40px 0;
+}
+
+.visitor-clock{
+    background:#050505;
+    padding:25px 35px;
+    border-radius:28px;
+    text-align:center;
+    box-shadow:
+        0 0 20px rgba(255,0,255,0.25),
+        0 0 50px rgba(0,255,255,0.15);
+    border:2px solid rgba(255,255,255,0.08);
+    max-width:500px;
+    width:100%;
+    position:relative;
+    overflow:hidden;
+}
+
+.visitor-clock::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(255,0,255,0.12),
+        rgba(0,255,255,0.06),
+        rgba(255,255,0,0.08)
+    );
+    pointer-events:none;
+}
+
+.clock-label{
+    color:#ffffff;
+    font-size:14px;
+    letter-spacing:4px;
+    margin-bottom:18px;
+    position:relative;
+    z-index:2;
+    font-family:'Inter',sans-serif;
+}
+
+.digital-counter{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    position:relative;
+    z-index:2;
+    flex-wrap:wrap;
+}
+
+.digital-counter span{
+    width:62px;
+    height:92px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#000;
+    border-radius:12px;
+    font-size:64px;
+    font-family:'Orbitron',sans-serif;
+    font-weight:700;
+    line-height:1;
+    color:white;
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,0.05),
+        0 0 18px rgba(255,255,255,0.08);
+    animation:glow 5s linear infinite;
+}
+
+.digital-counter span:nth-child(1){
+    background:linear-gradient(180deg,#dfff5e,#ffe66d);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.digital-counter span:nth-child(2){
+    background:linear-gradient(180deg,#ffd54a,#ff7bc3);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.digital-counter span:nth-child(3){
+    background:linear-gradient(180deg,#ff8cff,#ff3dff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.digital-counter span:nth-child(4){
+    background:linear-gradient(180deg,#d16dff,#7a5cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.digital-counter span:nth-child(5){
+    background:linear-gradient(180deg,#7d7cff,#48b6ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.copyright{
+    margin-top:18px;
+    color:#bdbdbd;
+    font-size:13px;
+    position:relative;
+    z-index:2;
+    font-family:'Inter',sans-serif;
+}
+
+@keyframes glow{
+    0%{
+        filter:drop-shadow(0 0 5px rgba(255,255,255,0.2));
+    }
+    50%{
+        filter:drop-shadow(0 0 12px rgba(255,255,255,0.45));
+    }
+    100%{
+        filter:drop-shadow(0 0 5px rgba(255,255,255,0.2));
+    }
+}
+
+@media(max-width:600px){
+
+    .visitor-clock{
+        padding:20px 15px;
+    }
+
+    .digital-counter span{
+        width:48px;
+        height:75px;
+        font-size:48px;
+    }
+
+}
+</style>
+
+<script>
+(async function(){
+
+    const namespace = "kanishka_net_total_visitors";
+
+    // get current count
+    let count = localStorage.getItem(namespace);
+
+    // first visit
+    if(!count){
+        count = 1000;
+    }else{
+        count = parseInt(count) + 1;
+    }
+
+    // save updated count
+    localStorage.setItem(namespace, count);
+
+    // format count to 5 digits
+    const formatted = String(count).padStart(5,'0');
+
+    // update digits
+    for(let i=0;i<5;i++){
+        document.getElementById("digit"+(i+1)).innerText = formatted[i];
+    }
+
+})();
+</script>
+
     </body>
 </html>
