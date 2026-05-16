@@ -354,34 +354,31 @@
 }
 </style>
 
-<script>
+    <script>
 (async function(){
 
     const namespace = "kanishka_net_total_visitors";
 
-    // get current count
+    // FIRST COUNT
     let count = localStorage.getItem(namespace);
 
-    // first visit
+    // CHANGE START NUMBER HERE
     if(!count){
-        count = 8000;
+        count = 7000;
     }else{
         count = parseInt(count) + 1;
     }
 
-    // save updated count
     localStorage.setItem(namespace, count);
 
-    // format count to 5 digits
     const formatted = String(count).padStart(5,'0');
 
-    // update digits
     for(let i=0;i<5;i++){
         document.getElementById("digit"+(i+1)).innerText = formatted[i];
     }
 
 })();
 </script>
-
+    
     </body>
 </html>
