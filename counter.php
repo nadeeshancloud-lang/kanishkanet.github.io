@@ -14,114 +14,145 @@ if (!isset($_SESSION['has_visited_kanishka'])) {
     $visitor_count++;
     file_put_contents($counter_file, $visitor_count);
 }
-$formatted_count = sprintf('%06d', $visitor_count);
+// ඉලක්කම් 5ක් ලෙස Format කිරීම (උදා: 07833)
+$formatted_count = sprintf('%05d', $visitor_count);
 ?>
 
-<div class="counter-wrapper">
-    <div class="counter-title">Total Visitors</div>
-    <div class="odometer-container" id="odometer">
+<div class="digital-counter-box">
+    <div class="counter-header">TOTAL VISITORS</div>
+    
+    <div class="digital-display" id="digital-display">
         </div>
+
     <div class="counter-footer">
         © 2026 Kanishka Net. All Rights Reserved.
     </div>
 </div>
 
 <style>
-    .counter-wrapper {
-        background: linear-gradient(135deg, #12131a 0%, #0a0b0d 100%);
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* මුළු මීටරයේම පසුබිම */
+    .digital-counter-box {
+        background: #0d0f13;
+        border: 2px solid #1a1f29;
+        border-radius: 16px;
+        padding: 25px 35px;
         display: inline-block;
         text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 242, 254, 0.05);
+        font-family: 'Courier New', Courier, monospace; /* Digital පෙනුම සඳහා */
     }
-    .counter-title {
-        color: #8a99ad;
-        font-size: 16px;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-        font-weight: 600;
+
+    .counter-header {
+        color: #65758d;
+        font-size: 13px;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+        font-weight: bold;
     }
-    .odometer-container {
-        display: flex;
-        justify-content: center;
-        background: #000;
-        padding: 10px 15px;
-        border-radius: 12px;
-        box-shadow: inset 0 5px 15px rgba(0,0,0,0.9), 0 0 15px rgba(0, 230, 118, 0.2);
-        border: 1px solid #1f232b;
-        overflow: hidden;
-    }
-    .digit-box {
-        position: relative;
-        width: 35px;
-        height: 50px;
-        overflow: hidden;
-        margin: 0 3px;
-        background: linear-gradient(to bottom, #2c303b 0%, #17191d 50%, #0b0c0e 100%);
-        border-radius: 6px;
-        border: 1px solid rgba(255,255,255,0.05);
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    .digit-sequence {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        transition: transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-        display: flex;
-        flex-direction: column;
-    }
-    .digit {
-        width: 100%;
-        height: 50px;
+
+    /* ඩිජිටල් තිරය */
+    .digital-display {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 32px;
-        font-weight: bold;
-        color: #00e676;
-        text-shadow: 0 0 10px rgba(0, 230, 118, 0.6);
+        background: #05070a;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 1px solid #161b26;
+        box-shadow: inset 0 4px 10px rgba(0,0,0,0.9);
     }
+
+    /* එක් ඩිජිටල් කොටුවක් (Calendar Block) */
+    .flip-card {
+        width: 42px;
+        height: 60px;
+        background: linear-gradient(to bottom, #1e2530 50%, #151a22 50%); /* මැදින් ඉරක් ඇති පෙනුම */
+        border-radius: 6px;
+        margin: 0 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: 900;
+        color: #00f2fe; /* දීප්තිමත් Digital සයන්/නිල් පැහැය */
+        text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid #242c3a;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* පියන්පත් දෙක වෙන් කරන මැද ඉර තද කිරීම */
+    .flip-card::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* මැද තියෙන බෙදුම් තිත් සලකුණ ( : ) */
+    .digital-colon {
+        font-size: 36px;
+        font-weight: bold;
+        color: #394557; /* තරමක් අඳුරු පැහැයක් */
+        margin: 0 2px;
+        animation: blinker 1.5s linear infinite; /* දිනදර්ශන වගේ නිවි නිවි පත්තුවීමට */
+        text-shadow: 0 0 8px rgba(57, 69, 87, 0.5);
+    }
+
+    @keyframes blinker {
+        50% { opacity: 0.3; }
+    }
+
+    /* කැරකෙන (Flip) Animation එක */
+    .flip-animate {
+        animation: flipEffect 0.6s ease-in-out;
+    }
+
+    @keyframes flipEffect {
+        0% { transform: rotateX(0deg); }
+        50% { transform: rotateX(90deg); opacity: 0.5; }
+        100% { transform: rotateX(0deg); }
+    }
+
     .counter-footer {
-        margin-top: 20px;
-        color: #556070;
-        font-size: 13px;
+        margin-top: 18px;
+        color: #414d61;
+        font-size: 11px;
         letter-spacing: 1px;
     }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // PHP මඟින් කෙලින්ම Count එක ගන්නවා (Fetch කරන්න ඕන නෑ)
+        // PHP මඟින් ලැබෙන ඉලක්කම් 5 (උදා: "07833")
         const countString = "<?php echo $formatted_count; ?>"; 
-        const container = document.getElementById('odometer');
-        container.innerHTML = '';
+        const display = document.getElementById('digital-display');
+        display.innerHTML = ''; // පැරණි දත්ත ඉවත් කිරීම
 
         for (let i = 0; i < countString.length; i++) {
-            const digitBox = document.createElement('div');
-            digitBox.className = 'digit-box';
+            // ඩිජිටල් කොටුව සෑදීම
+            const card = document.createElement('div');
+            card.className = 'flip-card';
+            card.innerText = countString[i];
+            display.appendChild(card);
 
-            const sequence = document.createElement('div');
-            sequence.className = 'digit-sequence';
-
-            for (let j = 0; j <= 9; j++) {
-                const digit = document.createElement('div');
-                digit.className = 'digit';
-                digit.innerText = j;
-                sequence.appendChild(digit);
-            }
-
-            digitBox.appendChild(sequence);
-            container.appendChild(digitBox);
-
+            // පිටුවට එද්දීම ලස්සනට Flip වී පෙන්වීමට
             setTimeout(() => {
-                const targetDigit = parseInt(countString[i]);
-                sequence.style.transform = `translateY(-${targetDigit * 50}px)`;
-            }, i * 150);
+                card.classList.add('flip-animate');
+            }, i * 100);
+
+            // අවසාන ඉලක්කම හැර හැම ඉලක්කමකටම පස්සේ " : " සලකුණ දැමීම
+            if (i < countString.length - 1) {
+                const colon = document.createElement('div');
+                colon.className = 'digital-colon';
+                colon.innerText = ':';
+                display.appendChild(colon);
+            }
         }
     });
 </script>
